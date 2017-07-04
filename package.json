@@ -1,0 +1,62 @@
+{
+  "name": "thinkific-api",
+  "version": "0.0.0",
+  "description": "Thinkific API javascript wrapper",
+  "main": "lib/index.js",
+  "files": [
+    "lib/"
+  ],
+  "keywords": [
+    "thinkific",
+    "api",
+    "rest",
+    "wrapper",
+    "javascript"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mwebler/thinkific-api"
+  },
+  "scripts": {
+    "audit": "nsp check package",
+    "build": "babel -d ./ ./src",
+    "check": "npm run audit",
+    "coverage": "nyc --reporter=lcov --reporter=text --reporter=html npm test",
+    "coveralls": "npm run coverage && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage",
+    "lint": "eslint src test",
+    "fix": "eslint src test --fix",
+    "test": "ava --require babel-core/register",
+    "validate": "npm run lint && npm test",
+    "prepare": "npm run build && npm run validate && npm run check",
+    "pp": "npm run prepare",
+    "major": "pmm major",
+    "minor": "pmm minor",
+    "patch": "pmm patch"
+  },
+  "author": {
+    "name": "Matheus Webler",
+    "email": "matheus.webler@gmail.com",
+    "url": "https://github.com/mwebler"
+  },
+  "pre-commit": [
+    "validate"
+  ],
+  "dependencies": {
+    "check-types": "^7.1.5"
+  },
+  "devDependencies": {
+    "ava": "^0.14.0",
+    "babel-cli": "^6.5.1",
+    "babel-core": "^6.5.2",
+    "babel-eslint": "^6.0.0",
+    "babel-plugin-transform-function-bind": "^6.5.2",
+    "babel-preset-es2015": "^6.5.0",
+    "coveralls": "^2.11.9",
+    "eslint": "^2.5.1",
+    "nsp": "^2.2.0",
+    "nyc": "^6.1.1",
+    "pmm": "^1.3.0",
+    "pre-commit": "^1.1.2"
+  }
+}
