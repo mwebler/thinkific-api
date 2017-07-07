@@ -20,9 +20,9 @@ const Courses = class CourseHandler {
 
   _getPage(page = 1) {
     return this._get(this._uriPage(page))
-    .then((response) => {
-      return new Iterable(response.items, response.meta.pagination, this);
-    });
+      .then((response) => {
+        return new Iterable(response.items, response.meta.pagination, this);
+      });
   }
 
   _uriPage(page = 1) {
