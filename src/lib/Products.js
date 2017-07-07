@@ -1,21 +1,12 @@
-import check from 'check-types';
-
 import Iterable from './Iterable';
 
-
-const Courses = class CourseHandler {
+const Products = class ProductHandler {
   constructor(_client) {
     this._client = _client;
   }
 
   getList() {
     return this._getPage(1);
-  }
-
-  getById(id) {
-    check.assert.assigned(id, 'Missing id parameter');
-
-    return this._get(this._uriSingle(id));
   }
 
   _getPage(page = 1) {
@@ -26,11 +17,11 @@ const Courses = class CourseHandler {
   }
 
   _uriPage(page = 1) {
-    return `courses?page=${page}`;
+    return `products?page=${page}`;
   }
 
   _uriSingle(id) {
-    return `courses/${id}`;
+    return `products/${id}`;
   }
 
   _get(...params) {
@@ -42,4 +33,4 @@ const Courses = class CourseHandler {
   }
 };
 
-export default Courses;
+export default Products;
