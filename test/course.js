@@ -2,16 +2,21 @@ import test from 'ava';
 import 'babel-core/register';
 import sampleOpts from './test-helper';
 
-import Client from '../src/lib/';
+import Thinkific from '../src/lib/';
 
 const courseName = 'API Test course';
 
-test('Should find a course by its name', (t) => {
-  const thinkific = new Client(sampleOpts);
-  t.pass();
-  /*thinkific.courses.findByName(courseName).then(course => {
-    t.is(course.name, courseName);
-  });*/
+test('Should loop at course list', async (t) => {
+  const thinkific = new Thinkific(sampleOpts);
+  let courses = await thinkific.courses.getList();
+  do {
+    courses.items.forEach(c => {
+      //do something with course c
+    }, this);
 
+    //get next page
+    courses = await courses.getNext();
+  } while (courses);
+
+  // done looping at courses
 });
-

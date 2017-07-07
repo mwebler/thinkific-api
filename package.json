@@ -40,9 +40,10 @@
     "url": "https://github.com/mwebler"
   },
   "pre-commit": [
-    "validate"
+
   ],
   "dependencies": {
+    "bluebird": "^3.5.0",
     "check-types": "^7.1.5",
     "request": "^2.81.0",
     "request-promise": "^4.2.1",
@@ -63,17 +64,17 @@
     "pre-commit": "^1.1.2"
   },
   "ava": {
-		"files": [
-			"test/*.js",
+    "files": [
+      "test/*.js",
       "!test/test-helper.js"
-		],
-		"concurrency": 5,
-		"failFast": true,
-		"failWithoutAssertions": false,
-		"powerAssert": false,
-		"require": [
-			"babel-register"
-		],
-		"babel": "inherit"
-	}
+    ],
+    "concurrency": 5,
+    "failFast": true,
+    "failWithoutAssertions": false,
+    "powerAssert": false,
+    "require": [
+      "babel-register"
+    ],
+    "babel": "inherit"
+  }
 }
