@@ -1,9 +1,8 @@
 import test from 'ava';
 import 'babel-core/register';
+import sampleOpts from './test-helper';
 
-import Client from '../src/lib/';
-
-const sampleOpts = { apiKey: 'teste-key', subdomain: 'webler.test.thinkific.com' };
+import Client from '../src/lib/index';
 
 test('Should create a client with options', (t) => {
   const c = new Client(sampleOpts);
@@ -13,31 +12,19 @@ test('Should create a client with options', (t) => {
 });
 
 test('Should not create an client without options', (t) => {
-  try {
+  t.throws(() => {
     const c = new Client();
-
-    t.fail(c);
-  } catch (error) {
-    t.pass();
-  }
+  });
 });
 
 test('Should not create a client without key', (t) => {
-  try {
+   t.throws(() => {
     const c = new Client({ subdomain: sampleOpts.subdomain });
-
-    t.fail(c);
-  } catch (error) {
-    t.pass();
-  }
+   });
 });
 
 test('Should not create a client without subdomain', (t) => {
-  try {
+  t.throws(() => {
     const c = new Client({ apiKey: sampleOpts.apiKey });
-
-    t.fail(c);
-  } catch (error) {
-    t.pass();
-  }
+  });
 });
