@@ -6,6 +6,7 @@ import urljoin from 'url-join';
 import config from './config';
 
 import Courses from './Courses';
+import Products from './Products';
 
 global.Promise = bluebird;
 
@@ -23,6 +24,8 @@ const Thinkific = class Thinkific {
     };
 
     this.courses = new Courses(this);
+    this.products = new Products(this);
+
   }
 
   _get(uri) {

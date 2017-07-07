@@ -18,6 +18,25 @@ const Courses = class CourseHandler {
     return this._get(this._uriSingle(id));
   }
 
+  async find(property, value) {
+    let courses = await this.getList();
+
+    do {
+      for (let i = 0; i < courses.items.length; i++) {
+        const c = courses.items[i];
+
+        if (c[property] === value) {
+          return c;
+        }
+      }
+
+      // get next page
+      courses = await courses.getNext();
+    } while (courses);
+
+    return null;
+  }
+
   _getPage(page = 1) {
     return this._get(this._uriPage(page))
       .then((response) => {
