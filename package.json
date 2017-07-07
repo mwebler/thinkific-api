@@ -40,7 +40,7 @@
     "url": "https://github.com/mwebler"
   },
   "pre-commit": [
-    "validate"
+
   ],
   "dependencies": {
     "bluebird": "^3.5.0",
