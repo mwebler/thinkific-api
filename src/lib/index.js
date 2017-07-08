@@ -6,6 +6,7 @@ import urljoin from 'url-join';
 import config from './config';
 
 import DefaultHandler from './DefaultHandler';
+import CouponHandler from './CouponHandler';
 
 global.Promise = bluebird;
 
@@ -25,7 +26,7 @@ const Thinkific = class Thinkific {
     this.courses = new DefaultHandler(config.urls.courses, this);
     this.products = new DefaultHandler(config.urls.products, this);
     this.promotions = new DefaultHandler(config.urls.promotions, this);
-    this.coupons = new DefaultHandler(config.urls.coupons, this);
+    this.coupons = new CouponHandler(config.urls.coupons, this);
 
   }
 
@@ -44,6 +45,25 @@ const Thinkific = class Thinkific {
       uri: urljoin(config.api, uri),
       headers: this._header,
       body: data,
+      json: true
+    });
+  }
+
+  put_(uri, data) {
+    return request({
+      method: 'PUT',
+      uri: urljoin(config.api, uri),
+      headers: this._header,
+      body: data,
+      json: true
+    });
+  }
+
+  _del(uri) {
+    return request({
+      method: 'DELETE',
+      uri: urljoin(config.api, uri),
+      headers: this._header,
       json: true
     });
   }

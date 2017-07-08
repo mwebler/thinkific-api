@@ -5,7 +5,7 @@ import Iterable from './Iterable';
 const DefaultHander = class DefaultHandler {
   constructor(resource, _client) {
     this._client = _client;
-    this._uri = resource;
+    this._resource = resource;
   }
 
   getList() {
@@ -22,6 +22,19 @@ const DefaultHander = class DefaultHandler {
     check.assert.assigned(data, 'Missing data parameter');
 
     return this._post(this._uri, data);
+  }
+
+  put(id, data) {
+    check.assert.assigned(id, 'Missing id parameter');
+    check.assert.assigned(data, 'Missing data parameter');
+
+    return this._put(this._uriSingle(id), data);
+  }
+
+  delete(id) {
+    check.assert.assigned(id, 'Missing id parameter');
+
+    return this._del(this._uriSingle(id));
   }
 
   async find(property, value) {
@@ -58,6 +71,14 @@ const DefaultHander = class DefaultHandler {
     return this._client._post(...params);
   }
 
+  _put(...params) {
+    return this._client._put(...params);
+  }
+
+  _del(...params) {
+    return this._client._del(...params);
+  }
+
   _uriPage(page = 1) {
     return `${this._uri}?page=${page}`;
   }
@@ -65,6 +86,8 @@ const DefaultHander = class DefaultHandler {
   _uriSingle(id) {
     return `${this._uri}/${id}`;
   }
+
+  get _uri() { return this._resource; }
 };
 
 export default DefaultHander;
