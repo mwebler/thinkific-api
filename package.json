@@ -2,9 +2,9 @@
   "name": "thinkific-api",
   "version": "0.0.0",
   "description": "Thinkific API javascript wrapper",
-  "main": "lib/index.js",
+  "main": "src/lib/index.js",
   "files": [
-    "lib/"
+    "src/lib/"
   ],
   "keywords": [
     "thinkific",
