@@ -2,10 +2,10 @@ import check from 'check-types';
 
 import Iterable from './Iterable';
 
-
-const Courses = class CourseHandler {
-  constructor(_client) {
+const DefaultHander = class DefaultHandler {
+  constructor(resource, _client) {
     this._client = _client;
+    this.resource = resource;
   }
 
   getList() {
@@ -19,20 +19,20 @@ const Courses = class CourseHandler {
   }
 
   async find(property, value) {
-    let courses = await this.getList();
+    let list = await this.getList();
 
     do {
-      for (let i = 0; i < courses.items.length; i++) {
-        const c = courses.items[i];
+      for (let i = 0; i < list.items.length; i++) {
+        const item = list.items[i];
 
-        if (c[property] === value) {
-          return c;
+        if (item[property] === value) {
+          return item;
         }
       }
 
       // get next page
-      courses = await courses.getNext();
-    } while (courses);
+      list = await list.getNext();
+    } while (list);
 
     return null;
   }
@@ -44,14 +44,6 @@ const Courses = class CourseHandler {
       });
   }
 
-  _uriPage(page = 1) {
-    return `courses?page=${page}`;
-  }
-
-  _uriSingle(id) {
-    return `courses/${id}`;
-  }
-
   _get(...params) {
     return this._client._get(...params);
   }
@@ -59,6 +51,14 @@ const Courses = class CourseHandler {
   _post(...params) {
     return this._client._post(...params);
   }
+
+  _uriPage(page = 1) {
+    return `${this.resource}?page=${page}`;
+  }
+
+  _uriSingle(id) {
+    return `${this.resource}/${id}`;
+  }
 };
 
-export default Courses;
+export default DefaultHander;

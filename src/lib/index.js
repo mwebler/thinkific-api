@@ -5,8 +5,7 @@ import urljoin from 'url-join';
 
 import config from './config';
 
-import Courses from './Courses';
-import Products from './Products';
+import DefaultHandler from './DefaultHandler';
 
 global.Promise = bluebird;
 
@@ -23,8 +22,8 @@ const Thinkific = class Thinkific {
       'x-auth-subdomain': this.subdomain
     };
 
-    this.courses = new Courses(this);
-    this.products = new Products(this);
+    this.courses = new DefaultHandler(config.urls.courses, this);
+    this.products = new DefaultHandler(config.urls.products, this);
 
   }
 
