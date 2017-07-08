@@ -5,7 +5,7 @@ import Iterable from './Iterable';
 const DefaultHander = class DefaultHandler {
   constructor(resource, _client) {
     this._client = _client;
-    this.resource = resource;
+    this._uri = resource;
   }
 
   getList() {
@@ -16,6 +16,12 @@ const DefaultHander = class DefaultHandler {
     check.assert.assigned(id, 'Missing id parameter');
 
     return this._get(this._uriSingle(id));
+  }
+
+  create(data) {
+    check.assert.assigned(data, 'Missing data parameter');
+
+    return this._post(this._uri, data);
   }
 
   async find(property, value) {
@@ -53,11 +59,11 @@ const DefaultHander = class DefaultHandler {
   }
 
   _uriPage(page = 1) {
-    return `${this.resource}?page=${page}`;
+    return `${this._uri}?page=${page}`;
   }
 
   _uriSingle(id) {
-    return `${this.resource}/${id}`;
+    return `${this._uri}/${id}`;
   }
 };
 

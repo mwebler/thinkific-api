@@ -24,6 +24,8 @@ const Thinkific = class Thinkific {
 
     this.courses = new DefaultHandler(config.urls.courses, this);
     this.products = new DefaultHandler(config.urls.products, this);
+    this.promotions = new DefaultHandler(config.urls.promotions, this);
+    this.coupons = new DefaultHandler(config.urls.coupons, this);
 
   }
 
@@ -40,7 +42,7 @@ const Thinkific = class Thinkific {
     return request({
       method: 'POST',
       uri: urljoin(config.api, uri),
-      header: this._header,
+      headers: this._header,
       body: data,
       json: true
     });
