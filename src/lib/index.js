@@ -17,6 +17,7 @@ global.Promise = bluebird;
  * @property {coupons} coupons A {@link CouponHandler} for handling coupons resource
 */
 const Thinkific = class Thinkific {
+
   /**
    * @summary Constructs a new Thinkific requester.
    * @param  {object} opts An object containg the subdomain and API key
