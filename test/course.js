@@ -3,7 +3,11 @@ import 'babel-core/register';
 import sampleOpts from './test-helper';
 import errors from 'request-promise/errors';
 
+import sinon from 'sinon';
+
 import Thinkific from '../src/lib/';
+
+
 
 /* Currently we are not able to create courses from API
   Expect the have a course with this name and id */
@@ -27,12 +31,25 @@ test('Should loop at course list', async (t) => {
 
 test('Should get a course by its id', async (t) => {
   const thinkific = new Thinkific(sampleOpts);
+
+  var get = sinon.stub(thinkific, '_get');
+
   let course = await thinkific.courses.getById(courseId);
-  t.is(course.id, courseId);
+
+  t.true(get.calledWithExactly(`courses/${courseId}`));
 });
 
 test('Should get assertion for course not found', async (t) => {
   const thinkific = new Thinkific(sampleOpts);
+  //Mock _get function to raise error
+  thinkific._get = function(uri){
+    if(uri !== 'courses/10000')
+      return Promise.resolve();
+
+    var error = {statusCode: 404};
+    return Promise.reject(error);
+  }
+
   const error = await t.throws(thinkific.courses.getById(10000));
   t.is(error.statusCode, 404);
 });

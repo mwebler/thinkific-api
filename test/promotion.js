@@ -3,9 +3,11 @@ import 'babel-core/register';
 import sampleOpts from './test-helper';
 import errors from 'request-promise/errors';
 
+import sinon from 'sinon';
+
 import Thinkific from '../src/lib/';
 
-test('Should create and delete a promotion', async (t) => {
+test('Should create a promotion', async (t) => {
   const promo = {
     "name": "Super test promotion create and del",
     "description": "My new test promotion",
@@ -18,14 +20,17 @@ test('Should create and delete a promotion', async (t) => {
 
   const thinkific = new Thinkific(sampleOpts);
 
+  var create = sinon.stub(thinkific, '_post');
+
   const p = await thinkific.promotions.create(promo);
-  t.is(p.name, promo.name);
-  return thinkific.promotions.delete(p.id);
+
+  t.true(create.calledWithExactly(`promotions`, promo));
 });
 
-test('Should create and update a promotion', async (t) => {
+
+test('Should update a promotion', async (t) => {
   const promo = {
-    "name": "Super test promotion update",
+    "name": "New name",
     "description": "My new test promotion",
     "starts_at": "2015-08-30T08:17:09.530Z",
     "expires_at": "2015-09-30T08:17:09.530Z",
@@ -33,41 +38,14 @@ test('Should create and update a promotion', async (t) => {
     "amount": 10,
     "duration": 3
   }
+  const promoId = 545645;
   const thinkific = new Thinkific(sampleOpts);
 
-  let p = await thinkific.promotions.create(promo);
-
-  const newName = "updated name";
-  const newPromo = Object.assign({}, promo);
-  newPromo.name = newName;
+  var update = sinon.stub(thinkific, '_put');
 
   // CHECK: the PUT method is returning an empty response (code 204)
   // But the name is being updated correctly!
-  await thinkific.promotions.put(p.id, newPromo);
+  await thinkific.promotions.put(promoId, promo);
 
-  p = await thinkific.promotions.getById(p.id);
-
-  t.is(p.name, newName);
-  return thinkific.promotions.delete(p.id);
-});
-
-test('Should create a promotion and find it by its name', async (t) => {
-  const promo = {
-    "name": "Super test promotion find",
-    "description": "My new test promotion",
-    "starts_at": "2015-08-30T08:17:09.530Z",
-    "expires_at": "2015-09-30T08:17:09.530Z",
-    "discount_type": "percentage",
-    "amount": 10,
-    "duration": 3
-  }
-  const thinkific = new Thinkific(sampleOpts);
-
-  const p = await thinkific.promotions.create(promo);
-
-  const found = await thinkific.promotions.find("name", p.name);
-
-  await thinkific.promotions.delete(p.id);
-
-  t.is(found.id, p.id);
+  t.true(update.calledWithExactly(`promotions/${promoId}`, promo));
 });
