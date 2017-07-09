@@ -5,7 +5,10 @@ import errors from 'request-promise/errors';
 
 import Thinkific from '../src/lib/';
 
+/* Currently we are not able to create products from API
+  Expect the have a product with this id related to an existing course */
 const courseId = 143618;
+const productId = 156665;
 
 test('Should loop at product list', async (t) => {
   const thinkific = new Thinkific(sampleOpts);
@@ -26,8 +29,8 @@ test('Should loop at product list', async (t) => {
 
 test('Should get a product by its id', async (t) => {
   const thinkific = new Thinkific(sampleOpts);
-  let product = await thinkific.products.getById(156665);
-  t.is(product.id, 156665);
+  let product = await thinkific.products.getById(productId);
+  t.is(product.id, productId);
 });
 
 test('Should get assertion for product not found', async (t) => {
@@ -44,7 +47,7 @@ test('Should get a product from course id', async (t) => {
   let products = await thinkific.products.getList();
 
 
-  let product = await thinkific.products.getById(156665);
-  t.is(product.id, 156665);
+  let product = await thinkific.products.getById(productId);
+  t.is(product.id, productId);
   t.is(product.productable_id, courseId);
 });

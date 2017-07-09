@@ -49,7 +49,7 @@ const Thinkific = class Thinkific {
     });
   }
 
-  put_(uri, data) {
+  _put(uri, data) {
     return request({
       method: 'PUT',
       uri: urljoin(config.api, uri),

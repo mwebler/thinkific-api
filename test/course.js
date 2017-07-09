@@ -5,6 +5,8 @@ import errors from 'request-promise/errors';
 
 import Thinkific from '../src/lib/';
 
+/* Currently we are not able to create courses from API
+  Expect the have a course with this name and id */
 const courseName = 'API Test course';
 const courseId = 143649;
 
@@ -15,7 +17,6 @@ test('Should loop at course list', async (t) => {
   do {
     courses.items.forEach(c => {
       //do something with course c
-
     }, this);
 
     //get next page
