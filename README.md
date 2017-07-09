@@ -8,7 +8,13 @@ Thinkific API javascript wrapper
 > This package is built for Node.js 7.10+ (with support for classes and async/await)
 
 ## Features
-//TODO
+Wraps 4 Thinkific API resources:
+```js
+thinkific.courses.*
+thinkific.products.*
+thinkific.promotions.*
+thinkific.coupons.*
+```
 
 ## Install
 Install the npm module from Github:
