@@ -5,17 +5,17 @@ import errors from 'request-promise/errors';
 
 import Thinkific from '../src/lib/';
 
-const promo = {
-  "name": "Super test promotion",
-	"description": "My new test promotion",
-	"starts_at": "2015-08-30T08:17:09.530Z",
-	"expires_at": "2015-09-30T08:17:09.530Z",
-	"discount_type": "percentage",
-	"amount": 10,
-	"duration": 3
-}
-
 test('Should create and delete a promotion', async (t) => {
+  const promo = {
+    "name": "Super test promotion create and del",
+    "description": "My new test promotion",
+    "starts_at": "2015-08-30T08:17:09.530Z",
+    "expires_at": "2015-09-30T08:17:09.530Z",
+    "discount_type": "percentage",
+    "amount": 10,
+    "duration": 3
+  }
+
   const thinkific = new Thinkific(sampleOpts);
 
   const p = await thinkific.promotions.create(promo);
@@ -24,6 +24,15 @@ test('Should create and delete a promotion', async (t) => {
 });
 
 test('Should create and update a promotion', async (t) => {
+  const promo = {
+    "name": "Super test promotion update",
+    "description": "My new test promotion",
+    "starts_at": "2015-08-30T08:17:09.530Z",
+    "expires_at": "2015-09-30T08:17:09.530Z",
+    "discount_type": "percentage",
+    "amount": 10,
+    "duration": 3
+  }
   const thinkific = new Thinkific(sampleOpts);
 
   let p = await thinkific.promotions.create(promo);
@@ -43,6 +52,15 @@ test('Should create and update a promotion', async (t) => {
 });
 
 test('Should create a promotion and find it by its name', async (t) => {
+  const promo = {
+    "name": "Super test promotion find",
+    "description": "My new test promotion",
+    "starts_at": "2015-08-30T08:17:09.530Z",
+    "expires_at": "2015-09-30T08:17:09.530Z",
+    "discount_type": "percentage",
+    "amount": 10,
+    "duration": 3
+  }
   const thinkific = new Thinkific(sampleOpts);
 
   const p = await thinkific.promotions.create(promo);
