@@ -11,23 +11,33 @@ const coupon = {
   quantity: 1,
 }
 
-const promo = 37692;
+const promo = {
+  "name": "A new Promotion",
+	"description": "My new promotion",
+	"starts_at": "2015-08-30T08:17:09.530Z",
+	"expires_at": "2015-09-30T08:17:09.530Z",
+	"discount_type": "percentage",
+	"amount": 10,
+	"duration": 3
+}
 
-test.beforeEach('Be sure to remove the existing coupon (useful when connecting to real API)',
+test.beforeEach('create a promotion to be used for coupons',
 async (t) => {
   const thinkific = new Thinkific(sampleOpts);
+  return thinkific.promotions.create(promo).then(p => {
+    promo.id = p.id;
+  });
+});
 
-  const coupons = await thinkific.coupons.getList(promo);
-  coupons.items.forEach(function(c) {
-    if(c.code === coupon.code){
-      return thinkific.coupons.delete(c.id);
-    }
-  }, this);
+test.afterEach('Be sure to remove the existing coupons and promotion (useful when connecting to real API)',
+async (t) => {
+  const thinkific = new Thinkific(sampleOpts);
+  return thinkific.promotions.delete(promo.id);
 });
 
 test('Should create a coupon for promotion', async (t) => {
   const thinkific = new Thinkific(sampleOpts);
 
-  const c = await thinkific.coupons.create(coupon, promo);
+  const c = await thinkific.coupons.create(coupon, promo.id);
   t.is(c.code, coupon.code);
 });

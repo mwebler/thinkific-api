@@ -20,7 +20,6 @@
   },
   "scripts": {
     "build": "babel -d ./ ./src",
-    "coverage": "nyc --reporter=lcov --reporter=text --reporter=html npm test",
     "lint": "eslint src --fix",
     "test": "ava"
   },
@@ -29,12 +28,10 @@
     "email": "matheus.webler@gmail.com",
     "url": "https://github.com/mwebler"
   },
-  "pre-commit": [
-
-  ],
   "dependencies": {
     "bluebird": "^3.5.0",
     "check-types": "^7.1.5",
+    "pre-commit": "^1.2.2",
     "request": "^2.81.0",
     "request-promise": "^4.2.1",
     "url-join": "^2.0.2"
@@ -46,12 +43,7 @@
     "babel-eslint": "^7.2.3",
     "babel-plugin-transform-function-bind": "^6.5.2",
     "babel-preset-es2015": "^6.5.0",
-    "coveralls": "^2.11.9",
-    "eslint": "^4.1.1",
-    "nsp": "^2.2.0",
-    "nyc": "^11.0.3",
-    "pmm": "^1.3.0",
-    "pre-commit": "^1.1.2"
+    "eslint": "^4.1.1"
   },
   "ava": {
     "files": [

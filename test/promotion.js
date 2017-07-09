@@ -19,6 +19,6 @@ test('Should create a promotion', async (t) => {
   const thinkific = new Thinkific(sampleOpts);
 
   const p = await thinkific.promotions.create(promo);
-
   t.is(p.name, promo.name);
+  return thinkific.promotions.delete(p.id);
 });
