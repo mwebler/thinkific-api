@@ -1,3 +1,7 @@
+/** Default iterable for list resources
+ * @property {items} items Array of resource items
+ * @property {pagination} pagination Pagination information (see Thinkific API docs)
+*/
 const Iterable = class Iterable {
   constructor(items, pagination, _handler) {
     this.items = items;
