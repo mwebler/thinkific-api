@@ -23,7 +23,7 @@ npm install mwebler/thinkific-api
 ```
 
 ## Documentation
-http://mwebler.me/thinkific-api/Thinkific.html
+https://mwebler.github.io/thinkific-api/Thinkific.html
 
 ## Usage
 
