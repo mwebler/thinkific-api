@@ -4,7 +4,8 @@ const config = {
     courses: 'courses',
     products: 'products',
     promotions: 'promotions',
-    coupons: 'coupons'
+    coupons: 'coupons',
+    users: 'users'    
   }
 };
 
